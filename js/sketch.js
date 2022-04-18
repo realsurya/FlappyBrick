@@ -40,7 +40,8 @@ let pipeInterval = 150;
 let pipeDecel = .01;
 let disapearRate = 2;
 
-function setup(){
+function setup()
+{
 
     createCanvas(400, 600);
     frameRate(fps);
@@ -65,46 +66,60 @@ function setup(){
     pop();
 }
 
-function draw(){
+function draw()
+{
 
-    if(playing){
+    if(playing)
+    {
         frames += 1;
         background(0,0,0);
 
-        if (((frames % pipeInterval) == 0) && brick.alive){
+        if (((frames % pipeInterval) == 0) && brick.alive)
+        {
             pipes.push(new Pipe());
         }
 
         passingNow = brick.passing(pipes[0]);
-        if((passing == 1) && (passingNow == 0) && brick.alive){
+        if((passing == 1) && (passingNow == 0) && brick.alive)
+        {
             score +=1;
         }
         passing = passingNow;
 
-        for(var i = pipes.length - 1; i >= 0; i--){
+        for(var i = pipes.length - 1; i >= 0; i--)
+        {
             pipes[i].make();
             pipes[i].update();
 
-            if(brick.alive){
-                if(brick.clashing(pipes[i])){
+            if(brick.alive)
+            {
+                if(brick.clashing(pipes[i]))
+                {
                     brick.alive = 0;
                 }
-            }else{
-                for(var j = pipes.length - 1; j >= 0; j--){
-                    if(pipes[j].vel >= 0){
+            }else
+            {
+                for(var j = pipes.length - 1; j >= 0; j--)
+                {
+                    if(pipes[j].vel >= 0)
+                    {
                         pipes[j].vel -= pipeDecel;
-                    }else{
+                    }else
+                    {
                         pipes[j].vel = 0;
                     }
-                    if(pipes[j].filler >= 0){
+                    if(pipes[j].filler >= 0)
+                    {
                         pipes[j].filler -= disapearRate;
-                    }else{
+                    }else
+                    {
                         pipes[j].filler = 0;
                     }
                 }
             }
 
-            if (pipes[0].xpos <  (-1 * pipes[0].depth)){
+            if (pipes[0].xpos <  (-1 * pipes[0].depth))
+            {
                 pipes.splice(0,1);
             }
         }
@@ -117,7 +132,8 @@ function draw(){
         text(score, width / 2, fontCap);
         pop();
 
-        if(!brick.alive){
+        if(!brick.alive)
+        {
             drawingContext.filter = 'blur(0px)';
             push();
             textAlign(CENTER);
@@ -128,15 +144,19 @@ function draw(){
             pop();
             drawingContext.filter = 'blur(3px)';
 
-            if(fontPx < fontCap){
+            if(fontPx < fontCap)
+            {
                 fontPx += fontRate;
-            }else{
+            }else
+            {
                 fontPx = fontCap;
             }
 
-            if (brick.filler >= 0){
+            if (brick.filler >= 0)
+            {
                 brick.filler -= disapearRate;
-            }else{
+            }else
+            {
                 brick.filler = 0;
             }
         }
@@ -147,13 +167,18 @@ function draw(){
 
 }
 
-function keyPressed(){
+function keyPressed()
+{
 
-    if(keyCode == RETURN){
-        if(!playing){
+    if(keyCode == RETURN)
+    {
+        if(!playing)
+        {
             playing = 1
-        }else{
-            if(brick.alive){
+        }else
+        {
+            if(brick.alive)
+            {
                 brick.flap();
             }
         }

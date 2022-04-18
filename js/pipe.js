@@ -22,7 +22,8 @@
 //      [Git]: github.com/realsurya      //
 //---------------------------------------//
 
-function Pipe(){
+function Pipe()
+{
     
     this.depth = 40;
     this.gap = 100;
@@ -34,7 +35,8 @@ function Pipe(){
 
     this.vel = 2;
 
-    this.make = function(){
+    this.make = function()
+    {
         push();
         fill(this.filler,this.filler,this.filler);
         noStroke();
@@ -43,7 +45,8 @@ function Pipe(){
         pop();
     }
 
-    this.update = function(){
+    this.update = function()
+    {
         this.xpos -= this.vel;
     }
 
